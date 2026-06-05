@@ -5,6 +5,7 @@ import { useLocale } from "@/components/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { AssetImage } from "@/components/asset-image";
+import { Glow } from "@/components/decor";
 import { solution } from "@/lib/content";
 
 export function Solution() {
@@ -12,7 +13,9 @@ export function Solution() {
 
   return (
     <section id="solution" className="section scroll-mt-24 bg-paper">
-      <div className="container">
+      <Glow tone="green" className="start-[6%] bottom-[12%] h-72 w-72 opacity-50" />
+
+      <div className="container relative">
         <SectionHeading
           eyebrow={solution.eyebrow}
           title={solution.h2}
@@ -43,7 +46,7 @@ export function Solution() {
           <div className="grid gap-4 sm:grid-cols-2">
             {solution.specs.map((s, i) => (
               <Reveal key={s.label} delay={i * 0.06}>
-                <article className="h-full rounded-card border border-ink/10 bg-white p-5 shadow-card transition-transform duration-300 ease-emphatic hover:-translate-y-1.5">
+                <article className="card-lift gborder relative h-full rounded-card bg-white p-5 shadow-card hover:shadow-glow-soft">
                   <span
                     dir="ltr"
                     className="inline-flex min-w-[3.25rem] items-center justify-center rounded-lg border border-gold/40 bg-gold/10 px-2.5 py-1 font-mono text-xs font-bold tracking-wider text-gold"

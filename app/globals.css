@@ -131,3 +131,82 @@ html.js .pg-reveal.is-visible {
     transition: none;
   }
 }
+
+/* ============================================================
+   Refined design-system layer — "elevate the current identity"
+   ============================================================ */
+
+/* Gradient hairline border (premium card edge) */
+.gborder {
+  position: relative;
+}
+.gborder::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    140deg,
+    rgba(201, 162, 75, 0.55),
+    rgba(201, 162, 75, 0.07) 42%,
+    rgba(201, 162, 75, 0.28)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Card lift + soft gold glow on hover */
+.card-lift {
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.45s ease;
+}
+.card-lift:hover {
+  transform: translateY(-6px);
+}
+
+/* Ambient radial glow blob (placed behind content for depth) */
+.glow-blob {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated gold sheen, for select accents */
+.text-sheen {
+  background: linear-gradient(110deg, #c9a24b 28%, #f4e3b8 50%, #c9a24b 72%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: sheen 7s linear infinite;
+}
+
+/* Display heading refinement */
+.font-display {
+  font-optical-sizing: auto;
+  letter-spacing: -0.018em;
+}
+[dir="rtl"] .font-display {
+  letter-spacing: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-sheen {
+    animation: none;
+  }
+  .animate-float,
+  .animate-float-slow,
+  .animate-pulse-ring {
+    animation: none !important;
+  }
+}

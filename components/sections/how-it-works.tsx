@@ -5,7 +5,7 @@ import { ArrowRight } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Grain, Waveform } from "@/components/decor";
+import { Grain, Waveform, Glow, SectionFade } from "@/components/decor";
 import { how } from "@/lib/content";
 
 export function HowItWorks() {
@@ -16,8 +16,11 @@ export function HowItWorks() {
       id="how"
       className="section scroll-mt-24 bg-green-radial"
     >
+      <SectionFade from="paper" />
       <Grain className="mix-blend-soft-light" opacity={0.08} />
-      <Waveform className="inset-x-0 top-10 h-24 w-full" opacity={0.12} />
+      <Waveform className="inset-x-0 top-10 h-24 w-full" opacity={0.14} />
+      <Glow tone="gold" className="end-[10%] top-[20%] h-72 w-72" />
+      <Glow tone="green" className="bottom-[6%] start-[4%] h-80 w-80" />
 
       <div className="container relative">
         <SectionHeading
@@ -31,8 +34,8 @@ export function HowItWorks() {
           {how.steps.map((s, i) => (
             <Fragment key={i}>
               <Reveal delay={i * 0.08} className="flex-1">
-                <div className="h-full rounded-card border-gold-hair bg-green-panel/25 p-6 backdrop-blur-sm">
-                  <div className="font-display flex h-10 w-10 items-center justify-center rounded-full bg-gold text-base font-bold text-green-darkest">
+                <div className="card-lift gborder relative h-full rounded-card bg-green-panel/25 p-6 backdrop-blur-sm hover:bg-green-panel/35 hover:shadow-glow-soft">
+                  <div className="font-display flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-gold-bright to-gold text-base font-bold text-green-darkest shadow-[0_6px_22px_-6px_rgba(201,162,75,0.65)]">
                     {i + 1}
                   </div>
                   <h3 className="font-display mt-4 text-lg text-cream">
@@ -58,7 +61,7 @@ export function HowItWorks() {
 
         {/* Accuracy footer bar */}
         <Reveal delay={0.1}>
-          <div className="mt-10 flex flex-col items-start justify-between gap-5 rounded-card-lg border-gold-hair bg-green-darkest/45 p-6 sm:flex-row sm:items-center">
+          <div className="gborder relative mt-10 flex flex-col items-start justify-between gap-5 overflow-hidden rounded-card-lg bg-green-darkest/45 p-6 shadow-glow-soft sm:flex-row sm:items-center">
             <p className="text-sm font-semibold text-cream sm:text-base">
               {tp(how.footer)}
             </p>

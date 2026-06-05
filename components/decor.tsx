@@ -82,3 +82,66 @@ export function Waveform({
     </svg>
   );
 }
+
+/** Ambient radial glow blob for depth (place behind content). */
+export function Glow({
+  className,
+  tone = "gold",
+}: {
+  className?: string;
+  tone?: "gold" | "green" | "bright";
+}) {
+  const bg =
+    tone === "green"
+      ? "rgba(15, 74, 54, 0.5)"
+      : tone === "bright"
+        ? "rgba(229, 198, 121, 0.2)"
+        : "rgba(201, 162, 75, 0.16)";
+  return (
+    <div aria-hidden className={cn("glow-blob", className)} style={{ background: bg }} />
+  );
+}
+
+/** Concentric "listening" rings pulsing outward (CSS, compositor-only). */
+export function SoundWaveRings({ className }: { className?: string }) {
+  return (
+    <div aria-hidden className={cn("pointer-events-none absolute", className)}>
+      {[0, 1, 2].map((i) => (
+        <span
+          key={i}
+          className="absolute inset-0 rounded-full border border-gold/25 animate-pulse-ring"
+          style={{ animationDelay: `${i * 1.1}s` }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/** Soft gradient seam that blends a section's top edge into the previous one. */
+const SEAM_COLORS: Record<string, string> = {
+  darkest: "#04140F",
+  dark: "#062119",
+  green: "#0A3526",
+  cream: "#F7F2E5",
+  paper: "#FCFAF3",
+};
+export function SectionFade({
+  from,
+  className,
+}: {
+  from: keyof typeof SEAM_COLORS;
+  className?: string;
+}) {
+  return (
+    <div
+      aria-hidden
+      className={cn(
+        "pointer-events-none absolute inset-x-0 top-0 z-[1] h-20",
+        className
+      )}
+      style={{
+        background: `linear-gradient(to bottom, ${SEAM_COLORS[from]}, transparent)`,
+      }}
+    />
+  );
+}

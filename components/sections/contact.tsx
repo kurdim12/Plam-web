@@ -4,7 +4,13 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import { Grain, GoldRings } from "@/components/decor";
+import {
+  Grain,
+  GoldRings,
+  Glow,
+  SoundWaveRings,
+  SectionFade,
+} from "@/components/decor";
 import { buttonVariants } from "@/components/ui/button";
 import { contact } from "@/lib/content";
 
@@ -23,11 +29,14 @@ export function Contact() {
 
   return (
     <section id="contact" className="section scroll-mt-24 bg-green-radial">
+      <SectionFade from="paper" />
       <Grain className="mix-blend-soft-light" opacity={0.08} />
       <GoldRings
         className="bottom-[-180px] end-[-160px] h-[540px] w-[540px]"
-        opacity={0.5}
+        opacity={0.4}
       />
+      <SoundWaveRings className="left-1/2 top-[24%] h-[240px] w-[240px] -translate-x-1/2" />
+      <Glow tone="gold" className="left-1/2 top-[18%] h-72 w-[55%] -translate-x-1/2" />
 
       <div className="container relative">
         <SectionHeading

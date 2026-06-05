@@ -2,6 +2,7 @@
 
 import { useLocale } from "@/components/locale-provider";
 import { Logo } from "@/components/asset-image";
+import { Glow } from "@/components/decor";
 import { footer } from "@/lib/content";
 import type { Pair } from "@/lib/content";
 
@@ -39,6 +40,11 @@ export function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-green-darkest">
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/45 to-transparent"
+      />
+      <Glow tone="green" className="start-[8%] top-[-12%] h-64 w-80 opacity-60" />
       <div className="container relative py-14">
         <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
           <div>
