@@ -416,6 +416,10 @@ export const team = {
     en: "Three engineers covering the full stack of the problem: intelligence, hardware, and the field.",
     ar: "ثلاثة مهندسين يغطون المشكلة من أطرافها كلها: الذكاء الاصطناعي، والعتاد، والميدان.",
   } as Pair,
+  photoCaption: {
+    en: "Left to right: Abdelrahman Al-Kurdi, Abdulrahman Al-Hammouni, Zaid Abu Al-Shaar",
+    ar: "من اليسار إلى اليمين: عبد الرحمن الكردي، عبد الرحمن الهمّوني، زيد أبو الشعر",
+  } as Pair,
   members: [
     {
       initials: "AK",
