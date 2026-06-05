@@ -75,13 +75,13 @@ export function Hero() {
         {/* Device card */}
         <Reveal delay={0.15} className="relative mx-auto w-full max-w-md lg:mx-0">
           <div className="relative">
-            <div className="overflow-hidden rounded-[22px] border-gold-hair bg-green-panel/40 p-2 shadow-card-dark transition-transform duration-500 ease-emphatic rotate-2 hover:rotate-0 rtl:-rotate-2 rtl:hover:rotate-0">
+            <div className="overflow-hidden rounded-[22px] border-gold-hair bg-black p-2 shadow-card-dark transition-transform duration-500 ease-emphatic rotate-2 hover:rotate-0 rtl:-rotate-2 rtl:hover:rotate-0">
               <AssetImage
-                src="/assets/render-light.jpg"
-                alt="Palm Guard device mounted on a date palm trunk"
+                src="/assets/render-dark.jpg"
+                alt="Palm Guard solar-powered acoustic detection device"
                 placeholder="render-light.jpg"
                 tone="dark"
-                className="aspect-[4/5] w-full rounded-[16px] object-cover"
+                className="aspect-square w-full rounded-[16px] bg-black object-contain"
               />
 
               {/* LISTENING badge — the one looping animation */}
