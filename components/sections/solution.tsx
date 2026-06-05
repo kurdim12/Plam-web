@@ -22,13 +22,13 @@ export function Solution() {
         <div className="mt-14 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
           {/* Device on black */}
           <Reveal className="lg:sticky lg:top-28">
-            <div className="relative rounded-card-lg border-gold-hair bg-green-darkest p-3 shadow-card-dark">
+            <div className="relative rounded-card-lg border-gold-hair bg-black p-3 shadow-card-dark">
               <AssetImage
                 src="/assets/render-dark.jpg"
                 alt="Palm Guard device on a black background"
                 placeholder="render-dark.jpg"
                 tone="dark"
-                className="aspect-[4/5] w-full rounded-[16px] object-cover"
+                className="aspect-[4/3] w-full rounded-[16px] bg-black object-contain"
               />
               <div className="absolute inset-x-3 bottom-3 flex items-start gap-3 rounded-2xl border-gold-hair bg-green-darkest/85 p-4 backdrop-blur-sm">
                 <Cpu className="mt-0.5 h-5 w-5 shrink-0 text-gold-bright" />

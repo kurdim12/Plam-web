@@ -416,13 +416,10 @@ export const team = {
     en: "Three engineers covering the full stack of the problem: intelligence, hardware, and the field.",
     ar: "ثلاثة مهندسين يغطون المشكلة من أطرافها كلها: الذكاء الاصطناعي، والعتاد، والميدان.",
   } as Pair,
-  photoCaption: {
-    en: "Left to right: Abdelrahman Al-Kurdi, Abdulrahman Al-Hammouni, Zaid Abu Al-Shaar",
-    ar: "من اليسار إلى اليمين: عبد الرحمن الكردي، عبد الرحمن الهمّوني، زيد أبو الشعر",
-  } as Pair,
   members: [
     {
       initials: "AK",
+      photo: "/assets/team-ak.jpg",
       name: { en: "Abdelrahman Al-Kurdi", ar: "عبد الرحمن الكردي" },
       role: { en: "AI Engineer", ar: "مهندس الذكاء الاصطناعي" },
       desc: {
@@ -432,6 +429,7 @@ export const team = {
     },
     {
       initials: "AH",
+      photo: "/assets/team-ah.jpg",
       name: { en: "Abdulrahman Al-Hammouni", ar: "عبد الرحمن الهمّوني" },
       role: { en: "Embedded Systems Engineer", ar: "مهندس الأنظمة المدمجة" },
       desc: {
@@ -441,6 +439,7 @@ export const team = {
     },
     {
       initials: "ZA",
+      photo: "/assets/team-za.jpg",
       name: { en: "Zaid Abu Al-Shaar", ar: "زيد أبو الشعر" },
       role: { en: "Data & Field Validation", ar: "مهندس البيانات والاختبار الميداني" },
       desc: {
