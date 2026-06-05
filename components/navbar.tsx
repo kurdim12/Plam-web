@@ -5,7 +5,6 @@ import { Menu, X } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { LangToggle } from "@/components/lang-toggle";
 import { Logo } from "@/components/asset-image";
-import { ScrollProgress } from "@/components/scroll-progress";
 import { buttonVariants } from "@/components/ui/button";
 import { nav } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -44,16 +43,14 @@ export function Navbar() {
   }, []);
 
   return (
-    <>
-      <ScrollProgress />
-      <header
-        className={cn(
-          "sticky top-0 z-50 transition-all duration-300",
-          scrolled
-            ? "border-b border-ink/10 bg-cream/80 shadow-[0_4px_30px_-20px_rgba(6,33,25,0.5)] backdrop-blur-md"
-            : "border-b border-transparent bg-cream/60 backdrop-blur-sm"
-        )}
-      >
+    <header
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-300",
+        scrolled
+          ? "border-b border-ink/10 bg-paper/85 backdrop-blur-md"
+          : "border-b border-transparent bg-paper/60 backdrop-blur-sm"
+      )}
+    >
         <nav className="container flex h-[72px] items-center justify-between gap-4">
           <a href="#top" className="flex shrink-0 items-center" aria-label="Palm Guard — home">
             <Logo />
@@ -128,7 +125,6 @@ export function Navbar() {
             </div>
           </div>
         )}
-      </header>
-    </>
+    </header>
   );
 }

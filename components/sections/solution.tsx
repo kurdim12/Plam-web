@@ -1,65 +1,61 @@
 "use client";
 
-import { Cpu } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/section-heading";
 import { AssetImage } from "@/components/asset-image";
-import { Glow } from "@/components/decor";
 import { solution } from "@/lib/content";
 
 export function Solution() {
   const { tp } = useLocale();
 
   return (
-    <section id="solution" className="section scroll-mt-24 bg-paper">
-      <Glow tone="green" className="start-[6%] bottom-[12%] h-72 w-72 opacity-50" />
-
-      <div className="container relative">
+    <section id="solution" className="section scroll-mt-24 bg-cream">
+      <div className="container">
         <SectionHeading
           eyebrow={solution.eyebrow}
           title={solution.h2}
           intro={solution.intro}
         />
 
-        <div className="mt-14 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
-          {/* Device on black */}
+        <div className="mt-16 grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:items-start lg:gap-16">
+          {/* Device */}
           <Reveal className="lg:sticky lg:top-28">
-            <div className="relative rounded-card-lg border-gold-hair bg-black p-3 shadow-card-dark">
+            <div className="overflow-hidden rounded-2xl border border-ink/[0.08] bg-black">
               <AssetImage
                 src="/assets/render-dark.jpg"
                 alt="Palm Guard device on a black background"
                 placeholder="render-dark.jpg"
                 tone="dark"
-                className="aspect-[4/3] w-full rounded-[16px] bg-black object-contain"
+                className="aspect-[4/3] w-full bg-black object-contain"
               />
-              <div className="absolute inset-x-3 bottom-3 flex items-start gap-3 rounded-2xl border-gold-hair bg-green-darkest/85 p-4 backdrop-blur-sm">
-                <Cpu className="mt-0.5 h-5 w-5 shrink-0 text-gold-bright" />
-                <p className="text-sm font-medium leading-snug text-cream/90">
-                  {tp(solution.badge)}
-                </p>
-              </div>
             </div>
+            <p className="mt-4 flex items-start gap-2.5 text-sm leading-snug text-muted">
+              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+              {tp(solution.badge)}
+            </p>
           </Reveal>
 
-          {/* Spec grid */}
-          <div className="grid gap-4 sm:grid-cols-2">
+          {/* Spec sheet */}
+          <div className="grid gap-x-10 gap-y-8 sm:grid-cols-2">
             {solution.specs.map((s, i) => (
-              <Reveal key={s.label} delay={i * 0.06}>
-                <article className="card-lift gborder relative h-full rounded-card bg-white p-5 shadow-card hover:shadow-glow-soft">
-                  <span
-                    dir="ltr"
-                    className="inline-flex min-w-[3.25rem] items-center justify-center rounded-lg border border-gold/40 bg-gold/10 px-2.5 py-1 font-mono text-xs font-bold tracking-wider text-gold"
-                  >
-                    {s.label}
-                  </span>
-                  <h3 className="font-display mt-4 text-lg text-ink">
-                    {tp(s.title)}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted">
-                    {tp(s.desc)}
-                  </p>
-                </article>
+              <Reveal
+                key={s.label}
+                delay={i * 0.05}
+                className="border-t border-ink/[0.1] pt-5"
+              >
+                <span
+                  dir="ltr"
+                  className="font-mono text-xs font-semibold tracking-wider text-gold"
+                >
+                  {s.label}
+                </span>
+                <h3 className="font-display mt-3 text-lg text-ink">
+                  {tp(s.title)}
+                </h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted">
+                  {tp(s.desc)}
+                </p>
               </Reveal>
             ))}
           </div>

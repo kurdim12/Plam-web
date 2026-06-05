@@ -21,52 +21,43 @@
     text-rendering: optimizeLegibility;
   }
 
-  /* Arabic / RTL — switch the entire tree to Almarai */
+  /* Arabic / RTL — Almarai for the whole tree */
   [dir="rtl"] body,
   [dir="rtl"] {
     font-family: var(--font-almarai), system-ui, sans-serif;
   }
 
-  /* Display headings: Fraunces in LTR, Almarai 800 in RTL */
   .font-display {
     font-family: var(--font-display), Georgia, serif;
+    font-optical-sizing: auto;
+    letter-spacing: -0.021em;
   }
   [dir="rtl"] .font-display {
     font-family: var(--font-almarai), system-ui, sans-serif;
     font-weight: 800;
+    letter-spacing: 0;
   }
 
-  /* Force Latin digits, numbers, emails & phones to read LTR even inside RTL */
+  /* Keep numbers / emails / phones LTR inside RTL */
   .force-ltr {
     direction: ltr;
     unicode-bidi: embed;
   }
 
   ::selection {
-    background: rgba(201, 162, 75, 0.3);
+    background: rgba(201, 162, 75, 0.22);
     color: #062119;
   }
 }
 
 @layer components {
-  /* Layered grain — subtle SVG fractal noise overlay */
-  .grain-overlay {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* Thin gold hairline border used on dark cards */
-  .border-gold-hair {
-    border: 1px solid rgba(201, 162, 75, 0.35);
-  }
-
-  /* Eyebrow label */
   .eyebrow {
-    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em];
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.2em];
   }
 
-  /* Section vertical rhythm */
+  /* Generous vertical rhythm */
   .section {
-    @apply relative overflow-hidden py-20 sm:py-28;
+    @apply relative py-24 sm:py-32;
   }
 }
 
@@ -79,33 +70,6 @@
   }
 }
 
-/* Compositor-only "listening" equalizer (keeps the JS frame-loop idle) */
-@keyframes pg-eq {
-  0%,
-  100% {
-    transform: scaleY(0.28);
-  }
-  50% {
-    transform: scaleY(1);
-  }
-}
-
-.eq-bar {
-  height: 100%;
-  transform-origin: bottom;
-  animation-name: pg-eq;
-  animation-iteration-count: infinite;
-  animation-timing-function: ease-in-out;
-  will-change: transform;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .eq-bar {
-    animation: none;
-    transform: scaleY(0.6);
-  }
-}
-
 /* Scroll reveal — visible by default; only hidden once JS is active (html.js),
    so content is never lost to no-JS, SSR, or a throttled frame loop. */
 .pg-reveal {
@@ -113,12 +77,11 @@
 }
 html.js .pg-reveal {
   opacity: 0;
-  transform: translateY(var(--reveal-y, 24px));
+  transform: translateY(var(--reveal-y, 16px));
   transition:
-    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0s);
-  will-change: opacity, transform;
 }
 html.js .pg-reveal.is-visible {
   opacity: 1;
@@ -129,84 +92,5 @@ html.js .pg-reveal.is-visible {
     opacity: 1;
     transform: none;
     transition: none;
-  }
-}
-
-/* ============================================================
-   Refined design-system layer — "elevate the current identity"
-   ============================================================ */
-
-/* Gradient hairline border (premium card edge) */
-.gborder {
-  position: relative;
-}
-.gborder::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(
-    140deg,
-    rgba(201, 162, 75, 0.55),
-    rgba(201, 162, 75, 0.07) 42%,
-    rgba(201, 162, 75, 0.28)
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  pointer-events: none;
-  z-index: 1;
-}
-
-/* Card lift + soft gold glow on hover */
-.card-lift {
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    border-color 0.45s ease;
-}
-.card-lift:hover {
-  transform: translateY(-6px);
-}
-
-/* Ambient radial glow blob (placed behind content for depth) */
-.glow-blob {
-  position: absolute;
-  border-radius: 9999px;
-  filter: blur(70px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Animated gold sheen, for select accents */
-.text-sheen {
-  background: linear-gradient(110deg, #c9a24b 28%, #f4e3b8 50%, #c9a24b 72%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: sheen 7s linear infinite;
-}
-
-/* Display heading refinement */
-.font-display {
-  font-optical-sizing: auto;
-  letter-spacing: -0.018em;
-}
-[dir="rtl"] .font-display {
-  letter-spacing: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .text-sheen {
-    animation: none;
-  }
-  .animate-float,
-  .animate-float-slow,
-  .animate-pulse-ring {
-    animation: none !important;
   }
 }

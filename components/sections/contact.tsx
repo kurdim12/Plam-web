@@ -4,13 +4,6 @@ import { Mail, MapPin, Phone } from "lucide-react";
 import { useLocale } from "@/components/locale-provider";
 import { Reveal } from "@/components/motion/reveal";
 import { SectionHeading } from "@/components/section-heading";
-import {
-  Grain,
-  GoldRings,
-  Glow,
-  SoundWaveRings,
-  SectionFade,
-} from "@/components/decor";
 import { buttonVariants } from "@/components/ui/button";
 import { contact } from "@/lib/content";
 
@@ -28,17 +21,11 @@ export function Contact() {
   const telHref = "tel:" + contact.phone.replace(/\s+/g, "");
 
   return (
-    <section id="contact" className="section scroll-mt-24 bg-green-radial">
-      <SectionFade from="paper" />
-      <Grain className="mix-blend-soft-light" opacity={0.08} />
-      <GoldRings
-        className="bottom-[-180px] end-[-160px] h-[540px] w-[540px]"
-        opacity={0.4}
-      />
-      <SoundWaveRings className="left-1/2 top-[24%] h-[240px] w-[240px] -translate-x-1/2" />
-      <Glow tone="gold" className="left-1/2 top-[18%] h-72 w-[55%] -translate-x-1/2" />
-
-      <div className="container relative">
+    <section
+      id="contact"
+      className="scroll-mt-24 bg-gradient-to-br from-green to-green-darkest py-24 sm:py-32"
+    >
+      <div className="container">
         <SectionHeading
           eyebrow={contact.eyebrow}
           title={contact.h2}
@@ -47,7 +34,7 @@ export function Contact() {
           align="center"
         />
 
-        <Reveal delay={0.16}>
+        <Reveal delay={0.15}>
           <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
             <a
               href={contact.whatsappUrl}
@@ -68,13 +55,12 @@ export function Contact() {
           </div>
         </Reveal>
 
-        <Reveal delay={0.22}>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-cream/75">
+        <Reveal delay={0.2}>
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm text-cream/65">
             <span className="inline-flex items-center gap-2">
               <MapPin className="h-4 w-4 text-gold" />
               {tp(contact.location)}
             </span>
-            <span aria-hidden className="hidden h-4 w-px bg-cream/20 sm:block" />
             <a
               href={telHref}
               dir="ltr"
@@ -83,7 +69,6 @@ export function Contact() {
               <Phone className="h-4 w-4 text-gold" />
               {contact.phone}
             </a>
-            <span aria-hidden className="hidden h-4 w-px bg-cream/20 sm:block" />
             <a
               href={`mailto:${contact.email}`}
               dir="ltr"
