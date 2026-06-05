@@ -2,26 +2,132 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #fcfaf3;
+    --foreground: #13271e;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    color: var(--foreground);
+    background: var(--background);
+    font-family: var(--font-albert), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Arabic / RTL — switch the entire tree to Almarai */
+  [dir="rtl"] body,
+  [dir="rtl"] {
+    font-family: var(--font-almarai), system-ui, sans-serif;
+  }
+
+  /* Display headings: Fraunces in LTR, Almarai 800 in RTL */
+  .font-display {
+    font-family: var(--font-display), Georgia, serif;
+  }
+  [dir="rtl"] .font-display {
+    font-family: var(--font-almarai), system-ui, sans-serif;
+    font-weight: 800;
+  }
+
+  /* Force Latin digits, numbers, emails & phones to read LTR even inside RTL */
+  .force-ltr {
+    direction: ltr;
+    unicode-bidi: embed;
+  }
+
+  ::selection {
+    background: rgba(201, 162, 75, 0.3);
+    color: #062119;
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  /* Layered grain — subtle SVG fractal noise overlay */
+  .grain-overlay {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Thin gold hairline border used on dark cards */
+  .border-gold-hair {
+    border: 1px solid rgba(201, 162, 75, 0.35);
+  }
+
+  /* Eyebrow label */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.22em];
+  }
+
+  /* Section vertical rhythm */
+  .section {
+    @apply relative overflow-hidden py-20 sm:py-28;
+  }
 }
 
 @layer utilities {
   .text-balance {
     text-wrap: balance;
+  }
+  .text-pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Compositor-only "listening" equalizer (keeps the JS frame-loop idle) */
+@keyframes pg-eq {
+  0%,
+  100% {
+    transform: scaleY(0.28);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+
+.eq-bar {
+  height: 100%;
+  transform-origin: bottom;
+  animation-name: pg-eq;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .eq-bar {
+    animation: none;
+    transform: scaleY(0.6);
+  }
+}
+
+/* Scroll reveal — visible by default; only hidden once JS is active (html.js),
+   so content is never lost to no-JS, SSR, or a throttled frame loop. */
+.pg-reveal {
+  opacity: 1;
+}
+html.js .pg-reveal {
+  opacity: 0;
+  transform: translateY(var(--reveal-y, 24px));
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+html.js .pg-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.js .pg-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 }
